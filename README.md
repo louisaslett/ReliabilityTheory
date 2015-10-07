@@ -1,2 +1,42 @@
-# ReliabilityTheory
-ReliabilityTheory R package: Tools for structural reliability analysis
+# ReliabilityTheory R package
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![license](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![metacran version](http://www.r-pkg.org/badges/version/ReliabilityTheory)](http://cran.r-project.org/web/packages/ReliabilityTheory/index.html)
+[![metacran downloads](http://cranlogs.r-pkg.org/badges/ReliabilityTheory?color=brightgreen)](http://cran.r-project.org/web/packages/ReliabilityTheory/index.html)
+[CRAN check result](http://cran.r-project.org/web/checks/check_results_ReliabilityTheory.html)
+
+The ReliabilityTheory package provides a variety of tools useful for performing
+structural reliability analysis, such as when using the structure function,
+system signature or survival signature.
+
+## Contact
+
+Please feel free to:
+
+* submit suggestions and bug-reports at: <https://github.com/louisaslett/ReliabilityTheory/issues>
+* compose an e-mail to: <aslett@stats.ox.ac.uk>
+
+## Install
+
+You can install the latest release directly from
+[CRAN](http://cran.r-project.org/web/packages/ReliabilityTheory/index.html).
+
+```r
+install.packages("ReliabilityTheory")
+```
+
+## Install development version (not recommended)
+
+Installing directly from [GitHub](https://github.com) is not supported by the
+`install.packages` command. You could use the
+[devtools](http://cran.r-project.org/web/packages/devtools/index.html) package
+to install the development version if desired.
+
+```r
+install.packages("devtools")
+library("devtools")
+install_github("louisaslett/ReliabilityTheory")
+```
+
+Under releases, the tree/commit from which CRAN releases were made are recorded,
+so historic source can be downloaded from there.
