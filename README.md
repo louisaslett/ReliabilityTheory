@@ -40,3 +40,13 @@ install_github("louisaslett/ReliabilityTheory")
 
 Under releases, the tree/commit from which CRAN releases were made are recorded,
 so historic source can be downloaded from there.
+
+## Citation
+
+If you use this software, please cite one of the following:
+
+Aslett, L. J. M. (2012), *ReliabilityTheory: Tools for structural reliability analysis*.  R package, `www.louisaslett.com`
+
+Aslett, L. J. M. (2012), MCMC for Inference on Phase-type and Masked System Lifetime Models, PhD thesis, Trinity College Dublin.
+
+Thank-you.
