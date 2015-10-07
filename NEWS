@@ -1,0 +1,18 @@
+ReliabilityTheory 0.1.4
+=======================
+
+ * Fix bug when naming of component types in survival signature is discordant with component order
+ * Fix bug when using survival signature with only one component type
+ * Updated contact details
+ * PDF manual should no longer have truncated lines
+
+ReliabilityTheory 0.1.1
+=======================
+
+ * Fix edge case bug in cut set computation
+ * New function to compute survival signature
+
+ReliabilityTheory 0.1.0
+=======================
+
+ * First public release

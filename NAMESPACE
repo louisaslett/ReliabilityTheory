@@ -1,0 +1,36 @@
+### Exports
+#export(coherentSystemsOfOrder)
+#export(coherentNetworksOfOrder)
+
+export(computeSystemSignature)
+export(computeNetworkSignature)
+
+export(computeSystemSurvivalSignature)
+
+export(expectedSystemLifetimeExp)
+export(expectedNetworkLifetimeExp)
+export(expectedSignatureLifetimeExp)
+
+export(maskedInferenceIIDCustom)
+export(maskedInferenceIIDExponential)
+#export(maskedInferenceIIDPhaseType)
+
+export(maskedInferenceEXCHCustom)
+export(maskedInferenceEXCHExponential)
+#export(maskedInferenceEXCHPhaseType)
+
+export(simulateSystem)
+
+export(systemGraphToGenerator)
+
+### Imports
+importFrom(sfsmisc, digitsBase)
+importFrom(combinat, permn)
+importFrom(FRACTION, gcd)
+importFrom(mcmc, metrop)
+import(PhaseType)
+importFrom(actuar, rphtype)
+importFrom(actuar, pphtype)
+importFrom(actuar, dphtype)
+importFrom(HI, arms)
+import(igraph)
