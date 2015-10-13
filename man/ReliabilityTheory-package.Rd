@@ -10,8 +10,8 @@ A collection of tools for working structural reliability problems, such as catal
 \tabular{ll}{
 Package: \tab ReliabilityTheory\cr
 Type: \tab Package\cr
-Version: \tab 0.1.0\cr
-Date: \tab 2012-10-29\cr
+Version: \tab 0.1.5\cr
+Date: \tab 2015-10-13\cr
 License: \tab GPL-2 | GPL-3\cr
 LazyLoad: \tab yes\cr
 }

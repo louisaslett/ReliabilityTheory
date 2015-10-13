@@ -8,7 +8,7 @@ minimalVertexPairCutSets <- function(graph, start, terminate) {
   stCutSets <- stCutSets[vapply(lapply(stCutSets, match, match(c(start, terminate), V(graph)$name), 0), sum, 1)==0]
   # Check that the cut set *is* an s,t separator, since igraph gets all separators
   cutGraphs <- lapply(stCutSets, delete.vertices, graph=graph)
-  reachable <- lapply(cutGraphs, subcomponent, match(start, V(graph)$name), "out")
+  reachable <- lapply(cutGraphs, subcomponent, start, "out")
   isSTsep <- rep(TRUE, length(stCutSets))
   for(j in 1:length(stCutSets)) { # Can't do nice vectorised stuff, because when deleting vertices igraph changes all the ids, so each check different
     if(match(terminate, V(cutGraphs[[j]])$name) %in% reachable[[j]]) {

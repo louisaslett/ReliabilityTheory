@@ -1,3 +1,8 @@
+ReliabilityTheory 0.1.5
+=======================
+
+ * Fix bug in minimal s-t vertex separation code (thanks to Alexis van Lennep for the bug report)
+
 ReliabilityTheory 0.1.4
 =======================
 
