@@ -1,5 +1,5 @@
 Package: ReliabilityTheory
-Title: Tools for structural reliability analysis
+Title: Tools for Structural Reliability Analysis
 Description: A variety of tools useful for performing structural
         reliability analysis, such as with structure function and
         system signatures.  Plans to expand more widely.
