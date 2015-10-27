@@ -1,4 +1,4 @@
 library(testthat)
 library(ReliabilityTheory)
 
-test_package("ReliabilityTheory")
+test_check("ReliabilityTheory")
