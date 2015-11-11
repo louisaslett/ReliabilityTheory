@@ -25,11 +25,20 @@ nonParBayesSystemInference(at.times, survival.signature, test.data, alpha=1, bet
     \code{survival.signature} argument.
   }
   \item{alpha, beta}{
-    the Beta prior shape parameters.  Each can be a single scalar for a fixed
-    prior across time, or a vector of parameters of the same length as the
-    \code{at.times} argument which indicates the time-varying prior parameter at
-    the corresponding time in \code{at.times}.  By default the 'uninformative'
-    prior with \code{alpha=1} and \code{beta=1} is used for all times.
+    the Beta prior shape parameters.  Each must match in type and can be:
+    \itemize{
+      \item a single scalar for a fixed prior across time and component types;
+      \item a vector of parameters of the same length as the \code{at.times}
+        argument, which indicates the time-varying prior parameter at the
+        corresponding time in \code{at.times}.  This is therefore time-varying,
+        but indicates the same time-varying prior for all component types;
+      \item a data frame where each column is named using the same names as for
+        the \code{survival.signature} argument and each row corresponds to the
+        time-varying prior parameter at the corresponding time in
+        \code{at.times}.
+    }
+    By default the 'uninformative' prior with \code{alpha=1} and \code{beta=1}
+    is used for all components at all times.
   }
 }
 \details{
@@ -92,13 +101,14 @@ y2 <- sapply(t, pweibull, scale=1.8, shape=2.2, lower.tail=FALSE)
 y3 <- sapply(t, plnorm, meanlog=0.4, sdlog=0.9, lower.tail=FALSE)
 y4 <- sapply(t, pgamma, scale=0.9, shape=3.2, lower.tail=FALSE)
 
-# Plot (uncomment following to run)
-\dontrun{library(ggplot2)}
-\dontrun{p <- ggplot(data.frame(Time=rep(t,5), Probability=c(yS,y1,y2,y3,y4),}
-\dontrun{            Item=c(rep(c("System", "T1", "T2", "T3", "T4"), each=300))))}
-\dontrun{p <- p + geom_line(aes(x=Time, y=Probability, linetype=Item))}
-\dontrun{p <- p + xlab("Time") + ylab("Survival Probability")}
-\dontrun{p}
+# Plot
+\dontrun{
+library(ggplot2)
+p <- ggplot(data.frame(Time=rep(t,5), Probability=c(yS,y1,y2,y3,y4),
+            Item=c(rep(c("System", "T1", "T2", "T3", "T4"), each=300))))
+p <- p + geom_line(aes(x=Time, y=Probability, linetype=Item))
+p <- p + xlab("Time") + ylab("Survival Probability")
+p}
 }
 \keyword{ non parametric }
 \keyword{ Bayesian inference }

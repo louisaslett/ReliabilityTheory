@@ -1,3 +1,9 @@
+ReliabilityTheory 0.2.0
+=======================
+
+ * Add function to compute non-parametric Bayesian posterior predictive system survival probabilities from Aslett, Coolen and Wilson (2015)
+ * Update testing infrastructure to latest testthat version setup
+
 ReliabilityTheory 0.1.5
 =======================
 
