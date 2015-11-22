@@ -8,6 +8,7 @@ export(computeNetworkSignature)
 export(computeSystemSurvivalSignature)
 
 export(nonParBayesSystemInference)
+export(nonParBayesSystemInferencePriorSets)
 
 export(expectedSystemLifetimeExp)
 export(expectedNetworkLifetimeExp)
