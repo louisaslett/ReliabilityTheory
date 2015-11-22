@@ -68,11 +68,11 @@ nonParBayesSystemInference <- function(at.times, survival.signature, test.data, 
       alpha <- unlist(alpha[i,])
       beta <- unlist(beta[i,])
       s <- sapply(test.data, function(t_i, t) { sum(t_i>t) }, t=t)
-      sum(apply(sig, 1, function(sigvec, prob.col, s, m, alpha, beta) {
+      sum(apply(sig, 1, function(sigvec, prob.col, s, m, n, alpha, beta) {
           l <- sigvec[!prob.col]
           sig <- sigvec[prob.col]
 
           sig * prod(choose(m,l) * beta(l+alpha+s, m-l+beta+n-s) / beta(alpha+s, beta+n-s))
-        }, prob.col=prob.col, s=s, m=m, alpha=alpha, beta=beta))
+        }, prob.col=prob.col, s=s, m=m, n=n, alpha=alpha, beta=beta))
     }, at.times=at.times, alpha=alpha, beta=beta, sig=survival.signature, prob.col=prob.col, test.data=test.data, m=apply(survival.signature[,-length(survival.signature),drop=FALSE], 2, max), n=sapply(test.data, length))
 }
