@@ -73,58 +73,50 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
     stop("nLower, nUpper, yLower and yUpper arguments must be either a vector or data frame and must match in type")
   }
 
+  # Detect cores
+  cores <- detectCores()
+  cores <- ifelse(is.na(cores), 1, cores)
+
   # Go through the times from smallest to biggest so that we have the best
   # possible ordering for priors
   nCur <- nUpper[order(at.times)[1],,drop=TRUE]
-  yCur <- yLower[order(at.times)[1],,drop=TRUE]
-  pLower <- sapply(order(at.times), function(i, at.times, nLower, nUpper, yLower, yUpper, sig, prob.col, test.data, m, N, K) {
+  pLower <- simplify2array(mclapply(order(at.times), function(i, at.times, nLower, nUpper, yLower, yUpper, sig, prob.col, test.data, m, N, K) {
     t <- at.times[i]
     nLower <- unlist(nLower[i,])
     nUpper <- unlist(nUpper[i,])
     nCur <- pmax(pmin(nCur, nUpper), nLower)
     yLower <- unlist(yLower[i,])
-    yUpper <- unlist(yUpper[i,])
-    yCur <- pmax(pmin(yCur, yUpper), yLower)
     s <- sapply(test.data, function(t_i, t) { sum(t_i>t) }, t=t)
-    res <- optim(c(nCur, yCur), function(pri, sig, prob.col, s, m, N, K) {
-      n <- pri[1:K]
-      y <- pri[-(1:K)]
-      sum(apply(sig, 1, function(sigvec, prob.col, s, m, N, n, y) {
+    res <- optim(nCur, function(n, sig, prob.col, s, m, N, K, yLower) {
+      sum(apply(sig, 1, function(sigvec, prob.col, s, m, N, n, yLower) {
         l <- sigvec[!prob.col]
         sig <- sigvec[prob.col]
 
-        sig * prod(choose(m,l) * beta(l+n*y+s, m-l+n*(1-y)+N-s) / beta(n*y+s, n*(1-y)+N-s))
-      }, prob.col=prob.col, s=s, m=m, N=N, n=n, y=y))
-    }, method="L-BFGS-B", lower=c(nLower, yLower), upper=c(nUpper, yUpper), sig=sig, prob.col=prob.col, s=s, m=m, N=N, K=K)
+        sig * prod(choose(m,l) * beta(l+n*yLower+s, m-l+n*(1-yLower)+N-s) / beta(n*yLower+s, n*(1-yLower)+N-s))
+      }, prob.col=prob.col, s=s, m=m, N=N, n=n, yLower=yLower))
+    }, method="L-BFGS-B", lower=nLower, upper=nUpper, sig=sig, prob.col=prob.col, s=s, m=m, N=N, K=K, yLower=yLower)
     nCur <<- res$par[1:K]
-    yCur <<- res$par[-(1:K)]
     res$value
-  }, at.times=at.times, nLower=nLower, nUpper=nUpper, yLower=yLower, yUpper=yUpper, sig=survival.signature, prob.col=prob.col, test.data=test.data, m=apply(survival.signature[,-length(survival.signature),drop=FALSE], 2, max), N=sapply(test.data, length), K=K)[rank(at.times)]
+  }, at.times=at.times, nLower=nLower, nUpper=nUpper, yLower=yLower, yUpper=yUpper, sig=survival.signature, prob.col=prob.col, test.data=test.data, m=apply(survival.signature[,-length(survival.signature),drop=FALSE], 2, max), N=sapply(test.data, length), K=K, mc.cores=cores))[rank(at.times)]
 
   nCur <- nLower[order(at.times)[1],,drop=TRUE]
-  yCur <- yUpper[order(at.times)[1],,drop=TRUE]
-  pUpper <- sapply(order(at.times), function(i, at.times, nLower, nUpper, yLower, yUpper, sig, prob.col, test.data, m, N, K) {
+  pUpper <- simplify2array(mclapply(order(at.times), function(i, at.times, nLower, nUpper, yLower, yUpper, sig, prob.col, test.data, m, N, K) {
     t <- at.times[i]
     nLower <- unlist(nLower[i,])
     nUpper <- unlist(nUpper[i,])
     nCur <- pmax(pmin(nCur, nUpper), nLower)
-    yLower <- unlist(yLower[i,])
     yUpper <- unlist(yUpper[i,])
-    yCur <- pmax(pmin(yCur, yUpper), yLower)
     s <- sapply(test.data, function(t_i, t) { sum(t_i>t) }, t=t)
-    res <- optim(c(nCur, yCur), function(pri, sig, prob.col, s, m, N, K) {
-      n <- pri[1:K]
-      y <- pri[-(1:K)]
-      -sum(apply(sig, 1, function(sigvec, prob.col, s, m, N, n, y) {
+    res <- optim(nCur, function(n, sig, prob.col, s, m, N, K, yUpper) {
+      -sum(apply(sig, 1, function(sigvec, prob.col, s, m, N, n, yUpper) {
         l <- sigvec[!prob.col]
         sig <- sigvec[prob.col]
 
-        sig * prod(choose(m,l) * beta(l+n*y+s, m-l+n*(1-y)+N-s) / beta(n*y+s, n*(1-y)+N-s))
-      }, prob.col=prob.col, s=s, m=m, N=N, n=n, y=y))
-    }, method="L-BFGS-B", lower=c(nLower, yLower), upper=c(nUpper, yUpper), sig=sig, prob.col=prob.col, s=s, m=m, N=N, K=K)
+        sig * prod(choose(m,l) * beta(l+n*yUpper+s, m-l+n*(1-yUpper)+N-s) / beta(n*yUpper+s, n*(1-yUpper)+N-s))
+      }, prob.col=prob.col, s=s, m=m, N=N, n=n, yUpper=yUpper))
+    }, method="L-BFGS-B", lower=nLower, upper=nUpper, sig=sig, prob.col=prob.col, s=s, m=m, N=N, K=K, yUpper=yUpper)
     nCur <<- res$par[1:K]
-    yCur <<- res$par[-(1:K)]
     -res$value
-  }, at.times=at.times, nLower=nLower, nUpper=nUpper, yLower=yLower, yUpper=yUpper, sig=survival.signature, prob.col=prob.col, test.data=test.data, m=apply(survival.signature[,-length(survival.signature),drop=FALSE], 2, max), N=sapply(test.data, length), K=K)[rank(at.times)]
+  }, at.times=at.times, nLower=nLower, nUpper=nUpper, yLower=yLower, yUpper=yUpper, sig=survival.signature, prob.col=prob.col, test.data=test.data, m=apply(survival.signature[,-length(survival.signature),drop=FALSE], 2, max), N=sapply(test.data, length), K=K, mc.cores=cores))[rank(at.times)]
   list(lower=pLower, upper=pUpper)
 }
