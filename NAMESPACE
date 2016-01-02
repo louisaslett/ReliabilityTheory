@@ -2,6 +2,8 @@
 #export(coherentSystemsOfOrder)
 #export(coherentNetworksOfOrder)
 
+export(setCompTypes)
+
 export(computeSystemSignature)
 export(computeNetworkSignature)
 
