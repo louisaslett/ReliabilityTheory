@@ -2,8 +2,8 @@
 minimalVertexPairCutSets <- function(graph, start, terminate) {
   # Get all separators
   stCutSets <- minimal.st.separators(graph)
-  # Double check separator (there was a bug in igraph early 0.6 releases)
-  stCutSets <- subset(stCutSets, vapply(stCutSets, is.minimal.separator, TRUE, graph=graph))
+#   # Double check separator (there was a bug in igraph early 0.6 releases)
+#   stCutSets <- subset(stCutSets, vapply(stCutSets, is.minimal.separator, TRUE, graph=graph))
   # Obviously, if s or t are in the cut set is it not of interest
   stCutSets <- stCutSets[vapply(lapply(stCutSets, match, match(c(start, terminate), V(graph)$name), 0), sum, 1)==0]
   # Check that the cut set *is* an s,t separator, since igraph gets all separators
