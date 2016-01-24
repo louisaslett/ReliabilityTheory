@@ -87,48 +87,50 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
     s <- sapply(test.data, function(t_i, t) { sum(t_i>t) }, t=t)
 
     # Using Theorems & Lemmas in paper
-    yl <- s/(N+m-1)
-    yu <- (s+m-1)/(N+m-1)
     n <- split(cbind(nLower, nUpper), 1:K)
-    for(k in 1:K) {
-      if(yLower[k] < yl[k]) {
-        n[[k]] <- nUpper[k]
-      } else if(yLower[k] > yu[k]) {
-        n[[k]] <- nLower[k]
-      } else if((lgamma(m[k]+nUpper[k]*(1-yLower[k])+N[k]-s[k])+
-                 lgamma(nLower[k]*(1-yLower[k])+N[k]-s[k])+
-                 lgamma(nUpper[k]+N[k])+
-                 lgamma(m[k]+nLower[k]+N[k])-
-                 lgamma(m[k]+nLower[k]*(1-yLower[k])+N[k]-s[k])-
-                 lgamma(nUpper[k]*(1-yLower[k])+N[k]-s[k])-
-                 lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) >= 1) &&
-                (lgamma(m[k]+nUpper[k]*yLower[k]+s[k])+
-                 lgamma(nLower[k]*yLower[k]+s[k])+
-                 lgamma(nUpper[k]+N[k])+
-                 lgamma(m[k]+nLower[k]+N[k])-
-                 lgamma(m[k]+nLower[k]*yLower[k]+s[k])+
-                 lgamma(nUpper[k]*yLower[k]+s[k])+
-                 lgamma(nLower[k]+N[k])+
-                 lgamma(m[k]+nUpper[k]+N[k]) <= 1)) {
-        n[[k]] <- nUpper[k]
-      } else if((lgamma(m[k]+nUpper[k]*(1-yLower[k])+N[k]-s[k])+
-                 lgamma(nLower[k]*(1-yLower[k])+N[k]-s[k])+
-                 lgamma(nUpper[k]+N[k])+
-                 lgamma(m[k]+nLower[k]+N[k])-
-                 lgamma(m[k]+nLower[k]*(1-yLower[k])+N[k]-s[k])-
-                 lgamma(nUpper[k]*(1-yLower[k])+N[k]-s[k])-
-                 lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) <= 1) &&
-                (lgamma(m[k]+nUpper[k]*yLower[k]+s[k])+
-                 lgamma(nLower[k]*yLower[k]+s[k])+
-                 lgamma(nUpper[k]+N[k])+
-                 lgamma(m[k]+nLower[k]+N[k])-
-                 lgamma(m[k]+nLower[k]*yLower[k]+s[k])-
-                 lgamma(nUpper[k]*yLower[k]+s[k])-
-                 lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) >= 1)) {
-        n[[k]] <- nLower[k]
+    if(all(N+m-1>0)) { # Can get zero if doing prior predictive, in which case just optimise
+      yl <- s/(N+m-1)
+      yu <- (s+m-1)/(N+m-1)
+      for(k in 1:K) {
+        if(yLower[k] < yl[k]) {
+          n[[k]] <- nUpper[k]
+        } else if(yLower[k] > yu[k]) {
+          n[[k]] <- nLower[k]
+        } else if((lgamma(m[k]+nUpper[k]*(1-yLower[k])+N[k]-s[k])+
+                   lgamma(nLower[k]*(1-yLower[k])+N[k]-s[k])+
+                   lgamma(nUpper[k]+N[k])+
+                   lgamma(m[k]+nLower[k]+N[k])-
+                   lgamma(m[k]+nLower[k]*(1-yLower[k])+N[k]-s[k])-
+                   lgamma(nUpper[k]*(1-yLower[k])+N[k]-s[k])-
+                   lgamma(nLower[k]+N[k])-
+                   lgamma(m[k]+nUpper[k]+N[k]) >= 1) &&
+                  (lgamma(m[k]+nUpper[k]*yLower[k]+s[k])+
+                   lgamma(nLower[k]*yLower[k]+s[k])+
+                   lgamma(nUpper[k]+N[k])+
+                   lgamma(m[k]+nLower[k]+N[k])-
+                   lgamma(m[k]+nLower[k]*yLower[k]+s[k])+
+                   lgamma(nUpper[k]*yLower[k]+s[k])+
+                   lgamma(nLower[k]+N[k])+
+                   lgamma(m[k]+nUpper[k]+N[k]) <= 1)) {
+          n[[k]] <- nUpper[k]
+        } else if((lgamma(m[k]+nUpper[k]*(1-yLower[k])+N[k]-s[k])+
+                   lgamma(nLower[k]*(1-yLower[k])+N[k]-s[k])+
+                   lgamma(nUpper[k]+N[k])+
+                   lgamma(m[k]+nLower[k]+N[k])-
+                   lgamma(m[k]+nLower[k]*(1-yLower[k])+N[k]-s[k])-
+                   lgamma(nUpper[k]*(1-yLower[k])+N[k]-s[k])-
+                   lgamma(nLower[k]+N[k])-
+                   lgamma(m[k]+nUpper[k]+N[k]) <= 1) &&
+                  (lgamma(m[k]+nUpper[k]*yLower[k]+s[k])+
+                   lgamma(nLower[k]*yLower[k]+s[k])+
+                   lgamma(nUpper[k]+N[k])+
+                   lgamma(m[k]+nLower[k]+N[k])-
+                   lgamma(m[k]+nLower[k]*yLower[k]+s[k])-
+                   lgamma(nUpper[k]*yLower[k]+s[k])-
+                   lgamma(nLower[k]+N[k])-
+                   lgamma(m[k]+nUpper[k]+N[k]) >= 1)) {
+          n[[k]] <- nLower[k]
+        }
       }
     }
     if(max(sapply(n, length)) > 1) { # In here the theorems or lemmas were not enough, so grid search over what is left
@@ -164,48 +166,50 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
     s <- sapply(test.data, function(t_i, t) { sum(t_i>t) }, t=t)
 
     # Using Theorems & Lemmas in paper
-    yl <- s/(N+m-1)
-    yu <- (s+m-1)/(N+m-1)
     n <- split(cbind(nLower, nUpper), 1:K)
-    for(k in 1:K) {
-      if(yUpper[k] < yl[k]) {
-        n[[k]] <- nLower[k]
-      } else if(yUpper[k] > yu[k]) {
-        n[[k]] <- nUpper[k]
-      } else if((lgamma(m[k]+nUpper[k]*(1-yUpper[k])+N[k]-s[k])+
-                 lgamma(nLower[k]*(1-yUpper[k])+N[k]-s[k])+
-                 lgamma(nUpper[k]+N[k])+
-                 lgamma(m[k]+nLower[k]+N[k])-
-                 lgamma(m[k]+nLower[k]*(1-yUpper[k])+N[k]-s[k])-
-                 lgamma(nUpper[k]*(1-yUpper[k])+N[k]-s[k])-
-                 lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) >= 1) &&
-                (lgamma(m[k]+nUpper[k]*yUpper[k]+s[k])+
-                 lgamma(nLower[k]*yUpper[k]+s[k])+
-                 lgamma(nUpper[k]+N[k])+
-                 lgamma(m[k]+nLower[k]+N[k])-
-                 lgamma(m[k]+nLower[k]*yUpper[k]+s[k])+
-                 lgamma(nUpper[k]*yUpper[k]+s[k])+
-                 lgamma(nLower[k]+N[k])+
-                 lgamma(m[k]+nUpper[k]+N[k]) <= 1)) {
-        n[[k]] <- nLower[k]
-      } else if((lgamma(m[k]+nUpper[k]*(1-yUpper[k])+N[k]-s[k])+
-                 lgamma(nLower[k]*(1-yUpper[k])+N[k]-s[k])+
-                 lgamma(nUpper[k]+N[k])+
-                 lgamma(m[k]+nLower[k]+N[k])-
-                 lgamma(m[k]+nLower[k]*(1-yUpper[k])+N[k]-s[k])-
-                 lgamma(nUpper[k]*(1-yUpper[k])+N[k]-s[k])-
-                 lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) <= 1) &&
-                (lgamma(m[k]+nUpper[k]*yUpper[k]+s[k])+
-                 lgamma(nLower[k]*yUpper[k]+s[k])+
-                 lgamma(nUpper[k]+N[k])+
-                 lgamma(m[k]+nLower[k]+N[k])-
-                 lgamma(m[k]+nLower[k]*yUpper[k]+s[k])-
-                 lgamma(nUpper[k]*yUpper[k]+s[k])-
-                 lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) >= 1)) {
-        n[[k]] <- nUpper[k]
+    if(all(N+m-1>0)) { # Can get zero if doing prior predictive, in which case just optimise
+      yl <- s/(N+m-1)
+      yu <- (s+m-1)/(N+m-1)
+      for(k in 1:K) {
+        if(yUpper[k] < yl[k]) {
+          n[[k]] <- nLower[k]
+        } else if(yUpper[k] > yu[k]) {
+          n[[k]] <- nUpper[k]
+        } else if((lgamma(m[k]+nUpper[k]*(1-yUpper[k])+N[k]-s[k])+
+                   lgamma(nLower[k]*(1-yUpper[k])+N[k]-s[k])+
+                   lgamma(nUpper[k]+N[k])+
+                   lgamma(m[k]+nLower[k]+N[k])-
+                   lgamma(m[k]+nLower[k]*(1-yUpper[k])+N[k]-s[k])-
+                   lgamma(nUpper[k]*(1-yUpper[k])+N[k]-s[k])-
+                   lgamma(nLower[k]+N[k])-
+                   lgamma(m[k]+nUpper[k]+N[k]) >= 1) &&
+                  (lgamma(m[k]+nUpper[k]*yUpper[k]+s[k])+
+                   lgamma(nLower[k]*yUpper[k]+s[k])+
+                   lgamma(nUpper[k]+N[k])+
+                   lgamma(m[k]+nLower[k]+N[k])-
+                   lgamma(m[k]+nLower[k]*yUpper[k]+s[k])+
+                   lgamma(nUpper[k]*yUpper[k]+s[k])+
+                   lgamma(nLower[k]+N[k])+
+                   lgamma(m[k]+nUpper[k]+N[k]) <= 1)) {
+          n[[k]] <- nLower[k]
+        } else if((lgamma(m[k]+nUpper[k]*(1-yUpper[k])+N[k]-s[k])+
+                   lgamma(nLower[k]*(1-yUpper[k])+N[k]-s[k])+
+                   lgamma(nUpper[k]+N[k])+
+                   lgamma(m[k]+nLower[k]+N[k])-
+                   lgamma(m[k]+nLower[k]*(1-yUpper[k])+N[k]-s[k])-
+                   lgamma(nUpper[k]*(1-yUpper[k])+N[k]-s[k])-
+                   lgamma(nLower[k]+N[k])-
+                   lgamma(m[k]+nUpper[k]+N[k]) <= 1) &&
+                  (lgamma(m[k]+nUpper[k]*yUpper[k]+s[k])+
+                   lgamma(nLower[k]*yUpper[k]+s[k])+
+                   lgamma(nUpper[k]+N[k])+
+                   lgamma(m[k]+nLower[k]+N[k])-
+                   lgamma(m[k]+nLower[k]*yUpper[k]+s[k])-
+                   lgamma(nUpper[k]*yUpper[k]+s[k])-
+                   lgamma(nLower[k]+N[k])-
+                   lgamma(m[k]+nUpper[k]+N[k]) >= 1)) {
+          n[[k]] <- nUpper[k]
+        }
       }
     }
     if(max(sapply(n, length)) > 1) { # In here the theorems or lemmas were not enough, so grid search over what is left
