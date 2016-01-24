@@ -103,7 +103,7 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
                    lgamma(m[k]+nLower[k]*(1-yLower[k])+N[k]-s[k])-
                    lgamma(nUpper[k]*(1-yLower[k])+N[k]-s[k])-
                    lgamma(nLower[k]+N[k])-
-                   lgamma(m[k]+nUpper[k]+N[k]) >= 1) &&
+                   lgamma(m[k]+nUpper[k]+N[k]) >= 0) &&
                   (lgamma(m[k]+nUpper[k]*yLower[k]+s[k])+
                    lgamma(nLower[k]*yLower[k]+s[k])+
                    lgamma(nUpper[k]+N[k])+
@@ -111,7 +111,7 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
                    lgamma(m[k]+nLower[k]*yLower[k]+s[k])+
                    lgamma(nUpper[k]*yLower[k]+s[k])+
                    lgamma(nLower[k]+N[k])+
-                   lgamma(m[k]+nUpper[k]+N[k]) <= 1)) {
+                   lgamma(m[k]+nUpper[k]+N[k]) <= 0)) {
           n[[k]] <- nUpper[k]
         } else if((lgamma(m[k]+nUpper[k]*(1-yLower[k])+N[k]-s[k])+
                    lgamma(nLower[k]*(1-yLower[k])+N[k]-s[k])+
@@ -120,7 +120,7 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
                    lgamma(m[k]+nLower[k]*(1-yLower[k])+N[k]-s[k])-
                    lgamma(nUpper[k]*(1-yLower[k])+N[k]-s[k])-
                    lgamma(nLower[k]+N[k])-
-                   lgamma(m[k]+nUpper[k]+N[k]) <= 1) &&
+                   lgamma(m[k]+nUpper[k]+N[k]) <= 0) &&
                   (lgamma(m[k]+nUpper[k]*yLower[k]+s[k])+
                    lgamma(nLower[k]*yLower[k]+s[k])+
                    lgamma(nUpper[k]+N[k])+
@@ -128,7 +128,7 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
                    lgamma(m[k]+nLower[k]*yLower[k]+s[k])-
                    lgamma(nUpper[k]*yLower[k]+s[k])-
                    lgamma(nLower[k]+N[k])-
-                   lgamma(m[k]+nUpper[k]+N[k]) >= 1)) {
+                   lgamma(m[k]+nUpper[k]+N[k]) >= 0)) {
           n[[k]] <- nLower[k]
         }
       }
@@ -182,7 +182,7 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
                    lgamma(m[k]+nLower[k]*(1-yUpper[k])+N[k]-s[k])-
                    lgamma(nUpper[k]*(1-yUpper[k])+N[k]-s[k])-
                    lgamma(nLower[k]+N[k])-
-                   lgamma(m[k]+nUpper[k]+N[k]) >= 1) &&
+                   lgamma(m[k]+nUpper[k]+N[k]) >= 0) &&
                   (lgamma(m[k]+nUpper[k]*yUpper[k]+s[k])+
                    lgamma(nLower[k]*yUpper[k]+s[k])+
                    lgamma(nUpper[k]+N[k])+
@@ -190,7 +190,7 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
                    lgamma(m[k]+nLower[k]*yUpper[k]+s[k])+
                    lgamma(nUpper[k]*yUpper[k]+s[k])+
                    lgamma(nLower[k]+N[k])+
-                   lgamma(m[k]+nUpper[k]+N[k]) <= 1)) {
+                   lgamma(m[k]+nUpper[k]+N[k]) <= 0)) {
           n[[k]] <- nLower[k]
         } else if((lgamma(m[k]+nUpper[k]*(1-yUpper[k])+N[k]-s[k])+
                    lgamma(nLower[k]*(1-yUpper[k])+N[k]-s[k])+
@@ -199,7 +199,7 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
                    lgamma(m[k]+nLower[k]*(1-yUpper[k])+N[k]-s[k])-
                    lgamma(nUpper[k]*(1-yUpper[k])+N[k]-s[k])-
                    lgamma(nLower[k]+N[k])-
-                   lgamma(m[k]+nUpper[k]+N[k]) <= 1) &&
+                   lgamma(m[k]+nUpper[k]+N[k]) <= 0) &&
                   (lgamma(m[k]+nUpper[k]*yUpper[k]+s[k])+
                    lgamma(nLower[k]*yUpper[k]+s[k])+
                    lgamma(nUpper[k]+N[k])+
@@ -207,7 +207,7 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
                    lgamma(m[k]+nLower[k]*yUpper[k]+s[k])-
                    lgamma(nUpper[k]*yUpper[k]+s[k])-
                    lgamma(nLower[k]+N[k])-
-                   lgamma(m[k]+nUpper[k]+N[k]) >= 1)) {
+                   lgamma(m[k]+nUpper[k]+N[k]) >= 0)) {
           n[[k]] <- nUpper[k]
         }
       }

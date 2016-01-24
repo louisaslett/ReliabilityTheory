@@ -124,7 +124,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(m[k]+nLower[k]*(1-yLower[k])+N[k]-s[k])-
                  lgamma(nUpper[k]*(1-yLower[k])+N[k]-s[k])-
                  lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) >= 1) &&
+                 lgamma(m[k]+nUpper[k]+N[k]) >= 0) &&
                 (lgamma(m[k]+nUpper[k]*yLower[k]+s[k])+
                  lgamma(nLower[k]*yLower[k]+s[k])+
                  lgamma(nUpper[k]+N[k])+
@@ -132,7 +132,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(m[k]+nLower[k]*yLower[k]+s[k])+
                  lgamma(nUpper[k]*yLower[k]+s[k])+
                  lgamma(nLower[k]+N[k])+
-                 lgamma(m[k]+nUpper[k]+N[k]) <= 1)) {
+                 lgamma(m[k]+nUpper[k]+N[k]) <= 0)) {
         cat("LemmaA\n")
         n[[k]] <- nUpper[k]
       } else if((lgamma(m[k]+nUpper[k]*(1-yLower[k])+N[k]-s[k])+
@@ -142,7 +142,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(m[k]+nLower[k]*(1-yLower[k])+N[k]-s[k])-
                  lgamma(nUpper[k]*(1-yLower[k])+N[k]-s[k])-
                  lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) <= 1) &&
+                 lgamma(m[k]+nUpper[k]+N[k]) <= 0) &&
                 (lgamma(m[k]+nUpper[k]*yLower[k]+s[k])+
                  lgamma(nLower[k]*yLower[k]+s[k])+
                  lgamma(nUpper[k]+N[k])+
@@ -150,7 +150,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(m[k]+nLower[k]*yLower[k]+s[k])-
                  lgamma(nUpper[k]*yLower[k]+s[k])-
                  lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) >= 1)) {
+                 lgamma(m[k]+nUpper[k]+N[k]) >= 0)) {
         cat("LemmaB\n")
         n[[k]] <- nLower[k]
       }
@@ -225,7 +225,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(m[k]+nLower[k]*(1-yUpper[k])+N[k]-s[k])-
                  lgamma(nUpper[k]*(1-yUpper[k])+N[k]-s[k])-
                  lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) >= 1) &&
+                 lgamma(m[k]+nUpper[k]+N[k]) >= 0) &&
                 (lgamma(m[k]+nUpper[k]*yUpper[k]+s[k])+
                  lgamma(nLower[k]*yUpper[k]+s[k])+
                  lgamma(nUpper[k]+N[k])+
@@ -233,7 +233,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(m[k]+nLower[k]*yUpper[k]+s[k])+
                  lgamma(nUpper[k]*yUpper[k]+s[k])+
                  lgamma(nLower[k]+N[k])+
-                 lgamma(m[k]+nUpper[k]+N[k]) <= 1)) {
+                 lgamma(m[k]+nUpper[k]+N[k]) <= 0)) {
         cat("LemmaA2\n")
         n[[k]] <- nLower[k]
       } else if((lgamma(m[k]+nUpper[k]*(1-yUpper[k])+N[k]-s[k])+
@@ -243,7 +243,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(m[k]+nLower[k]*(1-yUpper[k])+N[k]-s[k])-
                  lgamma(nUpper[k]*(1-yUpper[k])+N[k]-s[k])-
                  lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) <= 1) &&
+                 lgamma(m[k]+nUpper[k]+N[k]) <= 0) &&
                 (lgamma(m[k]+nUpper[k]*yUpper[k]+s[k])+
                  lgamma(nLower[k]*yUpper[k]+s[k])+
                  lgamma(nUpper[k]+N[k])+
@@ -251,7 +251,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(m[k]+nLower[k]*yUpper[k]+s[k])-
                  lgamma(nUpper[k]*yUpper[k]+s[k])-
                  lgamma(nLower[k]+N[k])-
-                 lgamma(m[k]+nUpper[k]+N[k]) >= 1)) {
+                 lgamma(m[k]+nUpper[k]+N[k]) >= 0)) {
         cat("LemmaB2\n")
         n[[k]] <- nUpper[k]
       }
