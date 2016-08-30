@@ -1,4 +1,4 @@
-nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, test.data, nLower=2, nUpper=2, yLower=0.5, yUpper=0.5) {
+nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, test.data, nLower=2, nUpper=2, yLower=0.5, yUpper=0.5, cores=NA) {
   # Sanity checks
   K <- ncol(survival.signature)-1 # number of types of component
   if( any(at.times<0) ) {
@@ -74,8 +74,10 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
   }
 
   # Detect cores
-  cores <- detectCores()
-  cores <- ifelse(is.na(cores), 1, cores)
+  if(is.na(cores)) {
+    cores <- detectCores()
+    cores <- ifelse(is.na(cores), 1, cores)
+  }
 
   # Go through the times from smallest to biggest so that we have the best
   # possible ordering for priors
