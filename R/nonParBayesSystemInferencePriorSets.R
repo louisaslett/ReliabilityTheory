@@ -40,7 +40,9 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
     if( ncol(nLower) != K || ncol(nUpper) != K || ncol(yLower) != K || ncol(yUpper) != K ) {
       stop("nLower, nUpper, yLower and yUpper must have priors for the same number of components as specified by the survival signature")
     }
-    if( !all.equal(nrow(nLower), nrow(nUpper), nrow(yLower), nrow(yUpper)) ) {
+    rowsMin <- min(c(nrow(nLower), nrow(nUpper), nrow(yLower), nrow(yUpper)))
+    rowsMax <- max(c(nrow(nLower), nrow(nUpper), nrow(yLower), nrow(yUpper)))
+    if( rowsMin != rowsMax ) {
       stop("nLower, nUpper, yLower and yUpper must have matching size (they differ in number of rows)")
     }
     if( !all(sort(names(nLower)) == sort(names(survival.signature)[!prob.col])) ||
