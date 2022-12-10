@@ -3,7 +3,7 @@
 \alias{sccsO5}
 \title{Catalogue of Simply Connected Coherent Systems of Order 5}
 \description{
-  This data sets provides a catalogue of the network graph, signature and minimal cut-sets of all simply connected coherent systems of order 5.
+  This data set provides a catalogue of the network graph, signature and minimal cut-sets of all simply connected coherent systems of order 5.
 }
 \usage{data(sccsO5)}
 \format{A list object, one item for each such systems.  Each item is itself a list, with the elements \code{$graph}, \code{$cutsets} and \code{$signature}.}

@@ -3,7 +3,7 @@
 \alias{cnO2}
 \title{Catalogue of Coherent Networks of Order 2}
 \description{
-  This data sets provides a catalogue of the network graph, signature and minimal cut-sets of all coherent networks of node order 2.
+  This data set provides a catalogue of the network graph, signature and minimal cut-sets of all coherent networks of node order 2.
 }
 \usage{data(cnO2)}
 \format{A list object, one item for each such network.  Each item is itself a list, with the elements \code{$graph}, \code{$cutsets} and \code{$signature}.}
