@@ -34,10 +34,10 @@ Coolen, F. P. A. and Coolen-Maturi, T. (2012), Generalizing the signature to sys
 Coolen, F. P. A., Coolen-Maturi, T., Al-nefaiee, A. H. and Aboalkhair, A. M. (2013), \sQuote{Recent advances in system reliability using the survival signature}, \emph{Proceedings of Advances in Risk and Reliability Technology Symposium, Loughborough}.
 }
 \author{
-Louis J. M. Aslett \email{aslett@stats.ox.ac.uk} (\url{http://www.louisaslett.com/})
+Louis J. M. Aslett \email{louis.aslett@durham.ac.uk} (\url{https://www.louisaslett.com/})
 }
 \note{
-Please feel free to email \email{aslett@stats.ox.ac.uk} with any queries or if you encounter errors when running this function.
+Please feel free to email \email{louis.aslett@durham.ac.uk} with any queries or if you encounter errors when running this function.
 }
 
 \seealso{

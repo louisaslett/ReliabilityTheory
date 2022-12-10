@@ -14,7 +14,7 @@ system signature or survival signature.
 Please feel free to:
 
 * submit suggestions and bug-reports at: <https://github.com/louisaslett/ReliabilityTheory/issues>
-* compose an e-mail to: <aslett@stats.ox.ac.uk>
+* compose an e-mail to: <louis.aslett@durham.ac.uk>
 
 ## Install
 

@@ -5,12 +5,13 @@ Description: A variety of tools useful for performing structural
         system signatures.  Plans to expand more widely.
 URL: http://www.louisaslett.com/
 Version: 0.1.5
-Maintainer: Louis Aslett <aslett@stats.ox.ac.uk>
-Author: Louis Aslett <aslett@stats.ox.ac.uk>
 Depends: igraph (>= 1.0.1)
 Imports: sfsmisc, combinat, FRACTION, mcmc, PhaseType (>= 0.1.3),
         actuar, HI
 Suggests: testthat
+Maintainer: Louis Aslett <louis.aslett@durham.ac.uk>
+Authors@R: person("Louis", "Aslett", email = "louis.aslett@durham.ac.uk",
+                  role = c("aut", "cre"))
 License: GPL-2 | GPL-3
 ByteCompile: yes
 LazyLoad: yes

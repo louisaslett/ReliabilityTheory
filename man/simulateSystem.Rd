@@ -33,10 +33,10 @@ This function then generates iid realisations of masked lifetimes.
 %Samaniego, F. J. (2007), \emph{System Signatures and Their Applications in Engineering Reliability}, Springer.
 %}
 \author{
-Louis J.M. Aslett \email{aslett@stats.ox.ac.uk} (\url{http://www.louisaslett.com/})
+Louis J.M. Aslett \email{louis.aslett@durham.ac.uk} (\url{https://www.louisaslett.com/})
 }
 \note{
-Please feel free to email \email{aslett@stats.ox.ac.uk} with any queries or if you encounter errors when running this function.
+Please feel free to email \email{louis.aslett@durham.ac.uk} with any queries or if you encounter errors when running this function.
 }
 
 %\seealso{

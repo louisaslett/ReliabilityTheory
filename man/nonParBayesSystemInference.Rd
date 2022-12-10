@@ -55,10 +55,10 @@ Taking the priors \eqn{p_t^k \sim} Beta(\eqn{\alpha_t^k, \beta_t^k}), Aslett \em
 Aslett, L. J. M., Coolen, F. P. A. and Wilson, S. P. (2015), \sQuote{Bayesian Inference for Reliability of Systems and Networks using the Survival Signature}, \emph{Risk Analysis} \bold{39}(9), 1640--1651.  \href{http://www.louisaslett.com/Papers/Aslett_Coolen_Wilson_2014.html}{Online versions}
 }
 \author{
-Louis J. M. Aslett \email{aslett@stats.ox.ac.uk} (\url{http://www.louisaslett.com/})
+Louis J. M. Aslett \email{louis.aslett@durham.ac.uk} (\url{https://www.louisaslett.com/})
 }
 \note{
-Please feel free to email \email{aslett@stats.ox.ac.uk} with any queries or if you encounter errors when running this function.
+Please feel free to email \email{louis.aslett@durham.ac.uk} with any queries or if you encounter errors when running this function.
 }
 
 \seealso{

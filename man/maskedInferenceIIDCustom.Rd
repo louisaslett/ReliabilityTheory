@@ -61,10 +61,10 @@ The arguments of the function are the prerequisites described in Algorithm 6.2 o
 Aslett, L. J. M. (2012), \emph{MCMC for Inference on Phase-type and Masked System Lifetime Models}, PhD Thesis, Trinity College Dublin.
 }
 \author{
-Louis J.M. Aslett \email{aslett@stats.ox.ac.uk} (\url{http://www.louisaslett.com/})
+Louis J.M. Aslett \email{louis.aslett@durham.ac.uk} (\url{https://www.louisaslett.com/})
 }
 \note{
-Please feel free to email \email{aslett@stats.ox.ac.uk} with any queries or if you encounter errors when running this function.
+Please feel free to email \email{louis.aslett@durham.ac.uk} with any queries or if you encounter errors when running this function.
 }
 
 \seealso{
