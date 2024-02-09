@@ -1,4 +1,5 @@
-# ReliabilityTheory R package
+# ReliabilityTheory <img src="man/figures/logo.png" align="right" height="278" alt="" />
+
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![license](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 [![metacran version](http://www.r-pkg.org/badges/version/ReliabilityTheory)](http://cran.r-project.org/web/packages/ReliabilityTheory/index.html)
