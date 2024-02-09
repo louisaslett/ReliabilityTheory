@@ -188,7 +188,7 @@ b3df <- rbind(data.frame(b3T1, Part="T1"),
 b3df$Item <- ordered(b3df$Item, levels=c("Prior", "Posterior"))
 b3df$Part <- ordered(b3df$Part, levels=c("T1", "T2", "T3", "System"))
 
-\dontrun{
+\donttest{
 library("ggplot2")
 library("xtable")
 

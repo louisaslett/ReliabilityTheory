@@ -14,20 +14,20 @@
 maskedInferenceIIDCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenData, rCompGivenParm, startParm, iter, ...) {
   n <- length(t)
   # First off check if signature is a single sig/sig list/topology list (eg sccsO4)
-  if( class(signature)=="list" && class(signature[[1]])=="list" && "signature"%in%names(signature[[1]]) && class(signature[[1]]$signature)=="numeric") {
+  if( inherits(signature, "list") && inherits(signature[[1]], "list") && inherits(signature[[1]], "signature") && inherits(signature[[1]]$signature, "numeric") ) {
     signature <- lapply(signature, `[[`, "signature")
   }
   sigIsList <- (class(signature)=="list")
   if(!sigIsList) { sig <- signature } # Here the signature selected randomly ("sig") never changes so assign off the bat
   numSigs <- length(signature)
   MgivenPsi <- rep(0, numSigs)
-  
+
   # Setup return parameter matrix
   parm <- as.data.frame(matrix(startParm, nrow=iter+1, ncol=length(startParm), byrow=TRUE))
   names(parm) <- names(startParm)
   # and return topology vector
   M <- rep(NA, iter+1)
-  
+
   progress <- 0
   for(it in 2:(iter+1)) {
     if(round(it*100/(iter+1), 0) != progress) { progress <- round(it*100/(iter+1), 0); cat("\r", progress, "% complete ...     "); }
@@ -45,7 +45,7 @@ maskedInferenceIIDCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenD
       M[it] <- sample(1:numSigs, 1, prob=exp(MgivenPsi))
       sig <- signature[[M[it]]]
     }
-    
+
     # DA block 1b
     # Sample failure times of components given parameters
     y <- c()
@@ -59,7 +59,7 @@ maskedInferenceIIDCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenD
       y <- c(y, rCompGivenParm(parm[it-1,,drop=FALSE], t[i], censoring, ...))
     }
     ##cat("Simulated Components:", y, "\n")
-    
+
     # DA block 2
     # Sample a new parameter values given simulated component failure times
     parm[it,] <- rParmGivenData(y, ...)
@@ -90,21 +90,21 @@ maskedInferenceIIDCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenD
 maskedInferenceEXCHCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenData, rCompGivenParm, startCompParm, startHypParm, iter, ...) {
   n <- length(t)
   # First off check if signature is a single sig/sig list/topology list (eg sccsO4)
-  if( class(signature)=="list" && class(signature[[1]])=="list" && "signature"%in%names(signature[[1]]) && class(signature[[1]]$signature)=="numeric") {
+  if( inherits(signature, "list") && inherits(signature[[1]], "list") && inherits(signature[[1]], "signature") && inherits(signature[[1]]$signature, "numeric") ) {
     signature <- lapply(signature, `[[`, "signature")
   }
   sigIsList <- (class(signature)=="list")
   if(!sigIsList) { sig <- signature } # Here the signature selected randomly ("sig") never changes so assign off the bat
   numSigs <- length(signature)
   MgivenPsi <- rep(0, numSigs)
-  
+
   # Setup parameter matrices
   psi <- lapply(1:n, function(i) { parm <- as.data.frame(matrix(startCompParm[[i]], nrow=iter+1, ncol=length(startCompParm[[i]]), byrow=TRUE)); names(parm) <- names(startCompParm[[i]]); parm })
   theta <- as.data.frame(matrix(startHypParm, nrow=iter+1, ncol=length(startHypParm), byrow=TRUE))
   names(theta) <- names(startHypParm)
   # and return topology vector
   M <- rep(NA, iter+1)
-  
+
   progress <- 0
   for(it in 2:(iter+1)) {
     if(round(it*100/(iter+1), 0) != progress) { progress <- round(it*100/(iter+1), 0); cat("\r", progress, "% complete ...     "); }
@@ -122,7 +122,7 @@ maskedInferenceEXCHCustom <- function(t, signature, cdfComp, pdfComp, rParmGiven
       M[it] <- sample(1:numSigs, 1, prob=exp(MgivenPsi))
       sig <- signature[[M[it]]]
     }
-    
+
     # DA block 1b
     # Sample failure times of components given parameters
     m <- length(sig)
@@ -137,7 +137,7 @@ maskedInferenceEXCHCustom <- function(t, signature, cdfComp, pdfComp, rParmGiven
       y[i,] <- rCompGivenParm(psi[[i]][it-1,,drop=FALSE], t[i], censoring, ...)
     }
     ##cat("Simulated Components:", y, "\n")
-    
+
     # DA block 2
     # Sample a new parameter values given simulated component failure times
     parm <- rParmGivenData(y, ...)

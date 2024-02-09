@@ -1,11 +1,9 @@
 setCompTypes <- function(sys, types) {
-  # Check we have a graph
-  if(typeof(sys)!="list" || class(sys)!="igraph") {
-    stop("the first argument must be a graph representing a system")
-  }
-  # Check that we have s,t nodes as a minimum
-  if(sum(is.na(match(c("s","t"), V(sys)$name)))) {
-    stop("The graph object must contain vertices named 's' and 't' to indicate the start and terminal points of the system being specified.")
+  # Check we have a system
+  assertSystem(sys)
+  # Confirm types is a list
+  if(typeof(types)!="list") {
+    stop("Types must be specified as a named list matching types to component numbers, eg list(T1 = c(1,3,5), T2 = c(2,4))")
   }
   # Check every component appears only once
   if(length(unlist(types)) != length(unique(unlist(types)))) {

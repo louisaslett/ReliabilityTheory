@@ -4,7 +4,7 @@ Description: A variety of tools useful for performing structural reliability
              analysis, such as with structure function and system signatures.
 URL: https://www.louisaslett.com/, https://github.com/louisaslett/ReliabilityTheory
 BugReports: https://github.com/louisaslett/ReliabilityTheory/issues
-Version: 0.1.6
+Version: 0.2.0
 Maintainer: Louis Aslett <louis.aslett@durham.ac.uk>
 Authors@R: person("Louis", "Aslett", email = "louis.aslett@durham.ac.uk",
                   role = c("aut", "cre"))

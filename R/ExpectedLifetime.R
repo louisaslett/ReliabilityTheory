@@ -7,12 +7,12 @@ expectedSignatureLifetimeExp <- function(s, rate=1) {
   sum(s * xin)
 }
 
-expectedSystemLifetimeExp <- function(g, rate=1) {
-  s <- computeSystemSignature(g)
+expectedSystemLifetimeExp <- function(sys, rate=1) {
+  s <- computeSystemSignature(sys)
   expectedSignatureLifetimeExp(s, rate)
 }
 
-expectedNetworkLifetimeExp <- function(g, rate=1) {
-  s <- computeNetworkSignature(g)
+expectedNetworkLifetimeExp <- function(sys, rate=1) {
+  s <- computeNetworkSignature(sys)
   expectedSignatureLifetimeExp(s, rate)
 }

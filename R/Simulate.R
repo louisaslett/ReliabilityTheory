@@ -1,11 +1,11 @@
 # Simulate n system failure times from the given system
 # system may be defined by a graph, cutsets or signature
 simulateSystem <- function(system, n, rdens, ...) {
-  if(class(system) == "igraph") {
+  if(inherits(system, "system")) {
     sig <- computeSystemSignature(system)
-  } else if(class(system) == "list") {
+  } else if(inherits(system, "list")) {
     stop("Cutset system definition not supported yet.")
-  } else if(class(system) == "numeric") {
+  } else if(inherits(system, "numeric")) {
     if(min(system) >= 0 && sum(system) == 1) {
       sig <- system
     } else {

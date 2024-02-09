@@ -7,13 +7,13 @@
 Computes the expected lifetime of a system/network specified by its signature or graph structure when the components have Exponential lifetime distribution with specified rate.  Useful for ordering systems/networks by expected lifetime.
 }
 \usage{
-expectedSystemLifetimeExp(g, rate=1)
-expectedNetworkLifetimeExp(g, rate=1)
+expectedSystemLifetimeExp(sys, rate=1)
+expectedNetworkLifetimeExp(sys, rate=1)
 expectedSignatureLifetimeExp(s, rate=1)
 }
 \arguments{
-  \item{g}{
-    an \code{\link{igraph}} object representing the system or network whose expected lifetime is to be computed.  There should be two terminal 'dummy' nodes to represent either end of the structure which must be labelled "s" and "t".  They are assumed perfectly reliable.  See details and examples.
+  \item{sys}{
+    a \code{system} object representing the system whose types are to be set.  This should have been created by a call to \code{\link{createSystem}}.
 }
   \item{s}{
     the signature vector of the system/network whose expected lifetime is to be computed.
@@ -23,7 +23,7 @@ expectedSignatureLifetimeExp(s, rate=1)
   }
 }
 \details{
-The system or network can be specified by means of an \code{\link{igraph}} object, whereby each end of the system is denoted by nodes names "s" and "t" which are taken to be perfectly reliable.  It is easy to construct the appropriate graph representation using the function \code{\link{graph.formula}}.
+The system or network is specified by means of a \code{\link{system}} object, whereby each end of the system is denoted by nodes named \code{s} and \code{t} which are taken to be perfectly reliable.  It is easy to construct the appropriate reliability block diagram representation using the function \code{\link{createSystem}}.  Note that each physically distinct component should be separately numbered when constructing this object.
 
 Alternatively, the signature may be provided instead (the other functions simply use the graph object to compute the signature).
 }
@@ -45,15 +45,17 @@ Please feel free to email \email{louis.aslett@durham.ac.uk} with any queries or 
 }
 \examples{
 # Find the expected lifetime of two component series system
-expectedSystemLifetimeExp(graph.formula(s -- 1 -- 2 -- t))
+expectedSystemLifetimeExp(createSystem(s -- 1 -- 2 -- t))
 
-# Find the expected lifetime of two component series system using it's signature directly
+# Find the expected lifetime of two component series system using it's signature
+# directly
 expectedSignatureLifetimeExp(c(1,0))
 
 # Find the expected lifetime of two component parallel system
-expectedSystemLifetimeExp(graph.formula(s -- 1:2 -- t))
+expectedSystemLifetimeExp(createSystem(s -- 1:2 -- t))
 
-# Find the expected lifetime of two component parallel system using it's signature directly
+# Find the expected lifetime of two component parallel system using it's
+# signature directly
 expectedSignatureLifetimeExp(c(0,1))
 }
 \keyword{ system }

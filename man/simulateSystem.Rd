@@ -9,7 +9,7 @@ simulateSystem(system, n, rdens, ...)
 }
 \arguments{
   \item{system}{
-    may be: an \code{\link{igraph}} object representing the system; the collection of cutsets of the system; or the system signature.
+    may be: a \code{\link{system}} object (made with \code{\link{createSystem}} representing the system; the collection of cutsets of the system; or the system signature.
 }
   \item{n}{
     how many simulations to produce.
@@ -22,7 +22,7 @@ simulateSystem(system, n, rdens, ...)
 }
 }
 \details{
-When the system or network is specified by means of an \code{\link{igraph}} object, each end of the system must be denoted by nodes named "s" and "t" which are taken to be perfectly reliable.  It is easy to construct the appropriate graph representation using the function \code{\link{graph.formula}}.
+The system or network is specified by means of a \code{\link{system}} object, whereby each end of the system is denoted by nodes named \code{s} and \code{t} which are taken to be perfectly reliable.  It is easy to construct the appropriate reliability block diagram representation using the function \code{\link{createSystem}}.  Note that each physically distinct component should be separately numbered when constructing this object.
 
 This function then generates iid realisations of masked lifetimes.
 }

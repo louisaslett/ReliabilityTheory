@@ -52,7 +52,7 @@ Taking the priors \eqn{p_t^k \sim} Beta(\eqn{\alpha_t^k, \beta_t^k}), Aslett \em
   A vector of the same length as the \code{at.times} argument, where each element is the posterior predictive probability of a new system surviving to the corresponding time in \code{at.times}.
 }
 \references{
-Aslett, L. J. M., Coolen, F. P. A. and Wilson, S. P. (2015), \sQuote{Bayesian Inference for Reliability of Systems and Networks using the Survival Signature}, \emph{Risk Analysis} \bold{39}(9), 1640--1651.  \href{http://www.louisaslett.com/Papers/Aslett_Coolen_Wilson_2014.html}{Online versions}
+Aslett, L. J. M., Coolen, F. P. A. and Wilson, S. P. (2015), \sQuote{Bayesian Inference for Reliability of Systems and Networks using the Survival Signature}, \emph{Risk Analysis} \bold{39}(9), 1640--1651.  \href{https://www.louisaslett.com/Papers/Aslett_Coolen_Wilson_2014.html}{Download paper}
 }
 \author{
 Louis J. M. Aslett \email{louis.aslett@durham.ac.uk} (\url{https://www.louisaslett.com/})
@@ -102,7 +102,7 @@ y3 <- sapply(t, plnorm, meanlog=0.4, sdlog=0.9, lower.tail=FALSE)
 y4 <- sapply(t, pgamma, scale=0.9, shape=3.2, lower.tail=FALSE)
 
 # Plot
-\dontrun{
+\donttest{
 library(ggplot2)
 p <- ggplot(data.frame(Time=rep(t,5), Probability=c(yS,y1,y2,y3,y4),
             Item=c(rep(c("System", "T1", "T2", "T3", "T4"), each=300))))
