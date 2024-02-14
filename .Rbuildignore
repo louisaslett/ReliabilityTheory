@@ -1,3 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 LICENSE
+^R/hex\.R$
+^inst/.*\.png$
