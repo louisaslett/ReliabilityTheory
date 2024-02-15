@@ -1,20 +1,18 @@
 citHeader("To cite ReliabilityTheory in publications, please use:")
 
-citEntry(entry = "Misc",
-  title        = "{ReliabilityTheory}: Tools for structural reliability analysis",
-  author       = personList(as.person("Louis J. M. Aslett")),
-  note         = "R package",
-  url          = "https://www.louisaslett.com/",
+bibentry(
+  "Manual",
+  title  = "{ReliabilityTheory}: Tools for structural reliability analysis",
+  author = person(c("Louis", "J.", "M."), "Aslett"),
+  note   = "R package",
+  year   = "2012",
+  url    = "https://www.louisaslett.com/")
 
-  textVersion  = "Aslett, L. J. M. (2012), ReliabilityTheory: Tools for structural reliability analysis.  R package, URL https://www.louisaslett.com/"
-)
-
-citEntry(entry = "PhdThesis",
-  title        = "{MCMC} for Inference on Phase-type and Masked System Lifetime Models",
-  author       = personList(as.person("Louis J. M. Aslett")),
-  school       = "Trinity College Dublin",
-  year         = "2012",
-  url          = "https://www.louisaslett.com/",
-
-  textVersion  = "Aslett, L. J. M. (2012), MCMC for Inference on Phase-type and Masked System Lifetime Models, PhD thesis, Trinity College Dublin."
-)
+bibentry(
+  "PhdThesis",
+  key    = "Aslett2012a",
+  title  = "{MCMC} for Inference on Phase-type and Masked System Lifetime Models",
+  author = person(c("Louis", "J.", "M."), "Aslett"),
+  school = "Trinity College Dublin",
+  year   = "2012",
+  url    = "https://www.louisaslett.com/")
