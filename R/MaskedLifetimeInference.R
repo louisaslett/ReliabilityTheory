@@ -14,7 +14,7 @@
 maskedInferenceIIDCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenData, rCompGivenParm, startParm, iter, ...) {
   n <- length(t)
   # First off check if signature is a single sig/sig list/topology list (eg sccsO4)
-  if( inherits(signature, "list") && inherits(signature[[1]], "list") && inherits(signature[[1]], "signature") && inherits(signature[[1]]$signature, "numeric") ) {
+  if( inherits(signature, "list") && inherits(signature[[1]], "list") && hasName(signature[[1]], "signature") && inherits(signature[[1]]$signature, "numeric") ) {
     signature <- lapply(signature, `[[`, "signature")
   }
   sigIsList <- (class(signature)=="list")
@@ -90,7 +90,7 @@ maskedInferenceIIDCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenD
 maskedInferenceEXCHCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenData, rCompGivenParm, startCompParm, startHypParm, iter, ...) {
   n <- length(t)
   # First off check if signature is a single sig/sig list/topology list (eg sccsO4)
-  if( inherits(signature, "list") && inherits(signature[[1]], "list") && inherits(signature[[1]], "signature") && inherits(signature[[1]]$signature, "numeric") ) {
+  if( inherits(signature, "list") && inherits(signature[[1]], "list") && hasName(signature[[1]], "signature") && inherits(signature[[1]]$signature, "numeric") ) {
     signature <- lapply(signature, `[[`, "signature")
   }
   sigIsList <- (class(signature)=="list")

@@ -9,8 +9,8 @@ Maintainer: Louis Aslett <louis.aslett@durham.ac.uk>
 Authors@R: person("Louis", "Aslett", email = "louis.aslett@durham.ac.uk",
                   role = c("aut", "cre"))
 Imports: actuar, combinat, FRACTION, igraph (>= 1.0.1), mcmc,
-         PhaseType (>= 0.2.0), sfsmisc
-Suggests: testthat, reshape2
+         PhaseType (>= 0.2.0), sfsmisc, utils
+Suggests: testthat, reshape2, ggplot2, xtable
 License: GPL-2 | GPL-3
 ByteCompile: yes
 LazyLoad: yes
