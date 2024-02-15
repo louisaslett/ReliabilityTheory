@@ -127,9 +127,9 @@ oneCompPriorPostSet <- function(name, at.times, test.data, nLower, nUpper, yLowe
   yL <- yLower[, match(name, names(yLower))]
   yU <- yUpper[, match(name, names(yUpper))]
   data <- test.data[match(name, names(test.data))]
-  # NB limited to 2 cores on CRAN
-  prio <- nonParBayesSystemInferencePriorSets(at.times, sig, nodata, nL, nU, yL, yU, cores = 2)
-  post <- nonParBayesSystemInferencePriorSets(at.times, sig,   data, nL, nU, yL, yU, cores = 2)
+  # NB limit to 1 core on CRAN due to Windows -- make larger to speed up locally!
+  prio <- nonParBayesSystemInferencePriorSets(at.times, sig, nodata, nL, nU, yL, yU, cores = 1)
+  post <- nonParBayesSystemInferencePriorSets(at.times, sig,   data, nL, nU, yL, yU, cores = 1)
   data.frame(Time=rep(at.times,2),
              Lower=c(prio$lower,post$lower),
              Upper=c(prio$upper,post$upper),
@@ -172,11 +172,12 @@ b3T1 <- oneCompPriorPostSet("T1", b3t, b3testdata, b3nL, b3nU, b3yL, b3yU)
 b3T2 <- oneCompPriorPostSet("T2", b3t, b3testdata, b3nL, b3nU, b3yL, b3yU)
 b3T3 <- oneCompPriorPostSet("T3", b3t, b3testdata, b3nL, b3nU, b3yL, b3yU)
 
-# Compute prior and posterior sets!!  NB limited to 2 cores on CRAN
+# Compute prior and posterior sets!!
+# NB limit to 1 core on CRAN due to Windows -- make larger to speed up locally!
 b3prio <- nonParBayesSystemInferencePriorSets(b3t, b3sig, b3nulldata,
-                                              b3nL, b3nU, b3yL, b3yU, cores = 2)
+                                              b3nL, b3nU, b3yL, b3yU, cores = 1)
 b3post <- nonParBayesSystemInferencePriorSets(b3t, b3sig, b3testdata,
-                                              b3nL, b3nU, b3yL, b3yU, cores = 2)
+                                              b3nL, b3nU, b3yL, b3yU, cores = 1)
 
 b3df <- rbind(data.frame(b3T1, Part="T1"),
               data.frame(b3T2, Part="T2"),

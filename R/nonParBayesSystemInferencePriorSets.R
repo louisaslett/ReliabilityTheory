@@ -77,8 +77,12 @@ nonParBayesSystemInferencePriorSets <- function(at.times, survival.signature, te
 
   # Detect cores
   if(is.na(cores)) {
-    cores <- detectCores()
-    cores <- ifelse(is.na(cores), 1, cores)
+    if(.Platform$OS.type == "unix") {
+      cores <- detectCores()
+      cores <- ifelse(is.na(cores), 1, cores)
+    } else {
+      cores <- 1L
+    }
   }
 
   # Go through the times from smallest to biggest so that we have the best
