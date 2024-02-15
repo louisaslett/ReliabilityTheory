@@ -94,3 +94,20 @@ coherentSystemsOfOrder <- function(n) {
 # o <- order(unlist(lapply(sccsO6, function(x) { expectedSignatureLifetimeExp(x$signature)})))
 # sccsO6 <- sccsO6[o]
 # save(sccsO6, file="sccsO6.RData", compress=TRUE)
+
+## When igraph version advanced, we need to update the graph versions held in these lists
+# data("sccsO2")
+# sccsO2 <- lapply(sccsO2, function(x) { x$graph <- igraph::upgrade_graph(x$graph); return(x); })
+# save(sccsO2, file="sccsO2.RData", compress=TRUE)
+# data("sccsO3")
+# sccsO3 <- lapply(sccsO3, function(x) { x$graph <- igraph::upgrade_graph(x$graph); return(x); })
+# save(sccsO3, file="sccsO3.RData", compress=TRUE)
+# data("sccsO4")
+# sccsO4 <- lapply(sccsO4, function(x) { x$graph <- igraph::upgrade_graph(x$graph); return(x); })
+# save(sccsO4, file="sccsO4.RData", compress=TRUE)
+# data("sccsO5")
+# sccsO5 <- lapply(sccsO5, function(x) { x$graph <- igraph::upgrade_graph(x$graph); return(x); })
+# save(sccsO5, file="sccsO5.RData", compress=TRUE)
+# data("sccsO6")
+# sccsO6 <- lapply(sccsO6, function(x) { x$graph <- igraph::upgrade_graph(x$graph); return(x); })
+# save(sccsO6, file="sccsO6.RData", compress=TRUE)
