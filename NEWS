@@ -1,3 +1,11 @@
+ReliabilityTheory 0.3.0
+=======================
+
+ * Returning ReliabilityTheory to CRAN after fixing archived dependency
+ * Improved method of creating systems with differing component types via createSystem function
+ * Fixes to masked inference functions
+ * Now have a hex sticker :)
+
 ReliabilityTheory 0.2.0
 =======================
 

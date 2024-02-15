@@ -1,5 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 LICENSE
+^README.md$
+^cran-comments.md$
 ^R/hex\.R$
 ^inst/.*\.png$
