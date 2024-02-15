@@ -139,8 +139,8 @@ oneCompPriorPostSet <- function(name, at.times, test.data, nLower, nUpper, yLowe
 # ----------------------------------------------
 
 # System
-b3 <- graph.formula(s -- 2:3 -- 4 -- 5:6 -- 1 -- t, 2 -- 5, 3 -- 6)
-b3 <- setCompTypes(b3, list("T1"=c(2,3,5,6), "T2"=c(4), "T3"=c(1)))
+b3 <- createSystem(s -- 2:3 -- 4 -- 5:6 -- 1 -- t, 2 -- 5, 3 -- 6,
+                   types = list(T1 = c(2,3,5,6), T2 = c(4), T3 = c(1)))
 
 # Data
 b3nulldata <- list("T1"=NULL, "T2"=NULL, "T3"=NULL)

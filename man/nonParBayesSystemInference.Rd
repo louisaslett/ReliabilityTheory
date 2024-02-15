@@ -67,17 +67,15 @@ Please feel free to email \email{louis.aslett@durham.ac.uk} with any queries or 
 \examples{
 ## Exactly reproduce the example in Section 4.1 of Aslett et al (2015), including Figure 5
 # First specify the system layout, numbered as per Figure 4
-g <- graph.formula(s -- 1 -- 2:4:5, 2 -- 3 -- t, 4:5 -- 6 -- t,
-                   s -- 7 -- 8 -- t, s -- 9 -- 10 -- 11 -- t, 7 -- 10 -- 8)
-# Then specify the component types (within the circles of Figure 4)
-V(g)$compType <- NA
-V(g)$compType[match(c("1","6","11"), V(g)$name)] <- "T1"
-V(g)$compType[match(c("2","3","9"), V(g)$name)] <- "T2"
-V(g)$compType[match(c("4","5","10"), V(g)$name)] <- "T3"
-V(g)$compType[match(c("7","8"), V(g)$name)] <- "T4"
+sys <- createSystem(s -- 1 -- 2:4:5, 2 -- 3 -- t, 4:5 -- 6 -- t,
+                    s -- 7 -- 8 -- t, s -- 9 -- 10 -- 11 -- t, 7 -- 10 -- 8,
+                    types = list(T1 = c(1, 6, 11),
+                                 T2 = c(2, 3, 9),
+                                 T3 = c(4, 5, 10),
+                                 T4 = c(7, 8)))
 
 # Compute the survival signature table from Appendix
-sig <- computeSystemSurvivalSignature(g)
+sig <- computeSystemSurvivalSignature(sys)
 
 # Simulate the test data (same seed as used in the paper)
 set.seed(233)

@@ -46,7 +46,7 @@ Please feel free to email \email{louis.aslett@durham.ac.uk} with any queries or 
 # Simulate 20 masked lifetimes of a two component series system with Exponential(2)
 # component lifetimes
 # Using igraph object ...
-simulateSystem(graph.formula(s -- 1 -- 2 -- t), 20, rexp, rate=2)
+simulateSystem(createSystem(s -- 1 -- 2 -- t), 20, rexp, rate=2)
 
 # ... and using signature
 simulateSystem(c(1,0), 20, rexp, rate=2)
