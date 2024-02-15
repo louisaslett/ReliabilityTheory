@@ -15,7 +15,7 @@ createSystem(..., types = NULL)
 multiple expressions which together define an undirected graph representation of the reliability block diagram for the system design. There should be two terminal \sQuote{dummy} nodes to represent either end of the system structure, which must be labelled \code{s} and \code{t} (assumed perfectly reliable).  All reliability assessment is of the connectivity of these nodes.  See details and examples.
 }
   \item{types}{
-(optional) named list of vectors. The names correspond to component types, whilst each vector indicates which components are of that type. When it is not specified then all components are assumed to be of the same type. This can be updated later using the function \code{\link{setCompTypes()}}.
+(optional) named list of vectors. The names correspond to component types, whilst each vector indicates which components are of that type. When it is not specified then all components are assumed to be of the same type. This can be updated later using the function \code{\link{setCompTypes}}.
 }
 }
 \details{
