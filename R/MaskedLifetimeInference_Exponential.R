@@ -27,7 +27,7 @@ rexpCompGivenParm <- function(pars, failTime, censoring, ...) {
 rexpParmGivenDataIID <- function(data, priorShape, priorScale) {
   posteriorShape <- priorShape + length(data)
   posteriorScale <- 1/(1/priorScale + sum(data))
-  
+
   rgamma(1, shape=posteriorShape, scale=posteriorScale)
 }
 
@@ -60,7 +60,7 @@ alphaBetaLPost <- function(musig, mm, nn, priorMu_Mu, priorSigma_Mu, priorMu_Sig
     log(sig) -
     ((mu^2/sig) + mm) * sum(log(1/(sig/mu) + rowSums(data))) -
     log(sig))
-  #print(c(mu,sig,res))
+  #message(c(mu,sig,res))
   res
 }
 alphaBetaLPost2 <- function(mu, sig, mm, nn, priorMu_Mu, priorSigma_Mu, priorMu_Sigma, priorSigma_Sigma, data) {
@@ -72,33 +72,33 @@ rexpParmGivenDataEXCH <- function(data, priorMu_Mu, priorSigma_Mu, priorMu_Sigma
   alphaBetaLPost3 <- Vectorize(alphaBetaLPost2, c("mu", "sig"))
   mm <- dim(data)[2]
   nn <- dim(data)[1]
-  
-  #cat("Data matrix is",nn,"x",mm)
-  
+
+  #message("Data matrix is",nn,"x",mm)
+
   # p(a,b|y)
   #axisM <- seq(1,11,length.out=100)
   #axisS <- seq(0.1,10,length.out=100)
   #z <- outer(axisM,axisS,FUN="alphaBetaLPost3", mm=mm, nn=nn, mu_alpha=priorMuShape, sigma_alpha=priorSigmaShape, mu_beta=priorMuScale, sigma_beta=priorSigmaScale, data=data)
   #contour(axisM,axisS,exp(z-max(z)), nlevels=50)
-  
+
   ###opt <- optim(c(last[nn+1]*last[nn+2],last[nn+1]*last[nn+2]^2), alphaBetaLPost, m=m, nn=nn, mu_alpha=priorMuShape, sigma_alpha=priorSigmaShape, mu_beta=priorMuScale, sigma_beta=priorSigmaScale, x=data, method="L-BFGS-B", lower=c(0.001,0.001), upper=c(10,10), control=list(fnscale=-1), hessian=TRUE)
   ##opt <- optim(c(last[nn+1]*last[nn+2],last[nn+1]*last[nn+2]^2), alphaBetaLPost, mm=mm, nn=nn, mu_alpha=priorMuShape, sigma_alpha=priorSigmaShape, mu_beta=priorMuScale, sigma_beta=priorSigmaScale, data=data, control=list(fnscale=-1), hessian=TRUE)
   #opt <- optim(c(priorMuShape*priorMuScale,priorMuShape*priorMuScale^2), alphaBetaLPost, mm=mm, nn=nn, mu_alpha=priorMuShape, sigma_alpha=priorSigmaShape, mu_beta=priorMuScale, sigma_beta=priorSigmaScale, data=data, control=list(fnscale=-1), hessian=TRUE)
   opt <- optim(c(priorMu_Mu, priorMu_Sigma), alphaBetaLPost, mm=mm, nn=nn, priorMu_Mu=priorMu_Mu, priorSigma_Mu=priorSigma_Mu, priorMu_Sigma=priorMu_Sigma, priorSigma_Sigma=priorSigma_Sigma, data=data, control=list(fnscale=-1), hessian=TRUE)
-  #print(opt)
+  #message(opt)
   muhat <- opt$par
   #muhat <- c(last[nn+1]*last[nn+2],last[nn+1]*last[nn+2]^2)
   H <- -opt$hessian
   #H <- -hessian(alphaBetaLPost, muhat, method="Richardson", mm=mm, nn=nn, mu_alpha=priorMuShape, sigma_alpha=priorSigmaShape, mu_beta=priorMuScale, sigma_beta=priorSigmaScale, data=data)
-  #print(H)
+  #message(H)
   res <- metrop(alphaBetaLPost, muhat, 100, scale=chol(solve(H)), mm=mm, nn=nn, priorMu_Mu=priorMu_Mu, priorSigma_Mu=priorSigma_Mu, priorMu_Sigma=priorMu_Sigma, priorSigma_Sigma=priorSigma_Sigma, data=data)
   #points(res$batch[100,1],res$batch[100,2], col="red", pch=20)
   parm <- c(res$batch[100,1]^2/res$batch[100,2], res$batch[100,2]/res$batch[100,1])
   #points(parm[1]*parm[2],parm[1]*parm[2]*parm[2], col="green", pch=20)
-  
+
   # p(psi|a,b,y)
-  #print(parm[1]+mm)
-  #print(parm[2]+rowSums(data))
+  #message(parm[1]+mm)
+  #message(parm[2]+rowSums(data))
   #c(rgamma(nn, shape=parm[1]+mm, scale=1/(1/parm[2]+rowSums(data))), parm)
   list(parm, as.list(rgamma(nn, shape=parm[1]+mm, scale=1/(1/parm[2]+rowSums(data)))))
 }
@@ -106,10 +106,10 @@ rexpParmGivenDataEXCH <- function(data, priorMu_Mu, priorSigma_Mu, priorMu_Sigma
 # t         = vector of system/network failure times
 # signature = signature of the system/network for which inference is performed
 maskedInferenceEXCHExponential <- function(t, signature, iter, priorMu_Mu, priorSigma_Mu, priorMu_Sigma, priorSigma_Sigma) {
-  print({priorMu <- exp(priorMu_Mu + priorSigma_Mu*rnorm(1))})
-  print({priorSigma <- exp(priorMu_Sigma + priorSigma_Sigma*rnorm(1))})
-  print({priorShape <- priorMu^2/priorSigma})
-  print({priorScale <- priorSigma/priorMu})
-  print({rateInit <- rgamma(1, shape=priorShape, scale=priorScale)})
+  message({priorMu <- exp(priorMu_Mu + priorSigma_Mu*rnorm(1))})
+  message({priorSigma <- exp(priorMu_Sigma + priorSigma_Sigma*rnorm(1))})
+  message({priorShape <- priorMu^2/priorSigma})
+  message({priorScale <- priorSigma/priorMu})
+  message({rateInit <- rgamma(1, shape=priorShape, scale=priorScale)})
   maskedInferenceEXCHCustom(t, signature, function(q, pars, ...){pexp(q, pars$rate)}, function(x, pars, ...){dexp(x, pars$rate)}, rexpParmGivenDataEXCH, rexpCompGivenParm, lapply(1:length(t), function(i) { c(rate=rateInit) }), c(priorShape=priorShape, priorScale=priorScale), iter, priorMu_Mu=priorMu_Mu, priorSigma_Mu=priorSigma_Mu, priorMu_Sigma=priorMu_Sigma, priorSigma_Sigma=priorSigma_Sigma)
 }

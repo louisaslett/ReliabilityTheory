@@ -2,27 +2,27 @@
 EGCUT <- function(Vs, TT, env) {
   graph <- get("graph", envir=env)
   terminate <- get("terminate", envir=env)
-  #print("===="); print("EGCUT CALLED"); print("Vs"); print(V(graph)[Vs]$name); print("TT"); print(V(graph)[TT]$name)
+  #message("===="); message("EGCUT CALLED"); message("Vs"); message(V(graph)[Vs]$name); message("TT"); message(V(graph)[TT]$name)
   # 1.
-  Vx <- setdiff(unlist(neighborhood(graph, 1, Vs)), Vs)#; print("Vx"); print(V(graph)[Vx]$name)
+  Vx <- setdiff(unlist(neighborhood(graph, 1, Vs)), Vs)#; message("Vx"); message(V(graph)[Vx]$name)
   # 2.
   Gt <- delete.vertices(graph, Vs)
-  Vt <- match(V(Gt)[subcomponent(Gt, match(terminate, V(Gt)$name), "out")]$name, V(graph)$name)#; print("Vt"); print(V(graph)[Vt]$name)
+  Vt <- match(V(Gt)[subcomponent(Gt, match(terminate, V(Gt)$name), "out")]$name, V(graph)$name)#; message("Vt"); message(V(graph)[Vt]$name)
   # 3.
   Z  <- setdiff(setdiff(as.numeric(V(graph)), Vs), Vt)
   # 4.
-  if(length(intersect(Z, TT)) != 0) {# print("Z int T"); print(V(graph)[intersect(Z, TT)]$name)
+  if(length(intersect(Z, TT)) != 0) {# message("Z int T"); message(V(graph)[intersect(Z, TT)]$name)
     return()
   }
   # 5.
-  Vs <- unique(union(Vs, Z))#; print("Vs"); print(V(graph)[Vs]$name)
+  Vs <- unique(union(Vs, Z))#; message("Vs"); message(V(graph)[Vs]$name)
   # 6.
-  Vx <- setdiff(Vx, Z)#; print("Vx"); print(V(graph)[Vs]$name)
+  Vx <- setdiff(Vx, Z)#; message("Vx"); message(V(graph)[Vs]$name)
   # 7. & 8.
   Ec <- get("Ec", envir=env)
   i <- get("i", envir=env)
   Ec[[i]] <- intersect(unique(unlist(lapply(Vs, incident, graph=graph))), unique(unlist(lapply(setdiff(as.numeric(V(graph)), Vs), incident, graph=graph))))
-  #print("Ec"); print(E(graph)[Ec[[i]]])
+  #message("Ec"); message(E(graph)[Ec[[i]]])
   i <- i+1
   assign("Ec", Ec, envir=env)
   assign("i", i, envir=env)
@@ -31,7 +31,7 @@ EGCUT <- function(Vs, TT, env) {
   # 10.
   while(length(setdiff(Vx, TT)) > 0) {
     # 11.
-    v <- setdiff(Vx, TT)[1]#; print("v"); print(V(graph)[v]$name)
+    v <- setdiff(Vx, TT)[1]#; message("v"); message(V(graph)[v]$name)
     Vx <- setdiff(Vx, v)
     # 12.
     EGCUT(unique(union(Vs, v)), unique(union(TT, Tpri)), env)
@@ -44,7 +44,7 @@ EGCUT <- function(Vs, TT, env) {
 minimalEdgeCutSets <- function(graph, start, terminate) {
   Ec <- list()
   i <- 1
-  
+
   # Initialise & call
   Vs <- match(start, V(graph)$name)
   TT <- match(terminate, V(graph)$name)

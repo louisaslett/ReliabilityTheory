@@ -5,3 +5,4 @@ LICENSE
 ^cran-comments.md$
 ^R/hex\.R$
 ^inst/.*\.png$
+^CRAN-SUBMISSION$

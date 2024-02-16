@@ -15,21 +15,21 @@ systemGraphToGenerator <- function(g, failRate, repairRate) {
     }
     C <- c(C, as.numeric(V(g)[i]))
   }
-  #print(C)
-  #print(V(g)[C]$name)
-  
+  #message(C)
+  #message(V(g)[C]$name)
+
   map <- list()
   for(state in (2^numComp-1):1) {
     bin <- digitsBase(state, ndigits=numComp)
     g2 <- delete.vertices(g, C[which(bin==0)])
     if(which(V(g2)$name=="t") %in% subcomponent(g2, which(V(g2)$name=="s"))) {
-      #print(state)
-      #print("works")
+      #message(state)
+      #message("works")
       map[[paste(bin, collapse="")]] <- list(failTo=c(), repairTo=c(), exitCount=0)
       cur <- paste(bin, collapse="") # current name
     } else {
-      #print(state)
-      #print("fails")
+      #message(state)
+      #message("fails")
       next
     }
     for(i in 1:numComp) {
@@ -49,7 +49,7 @@ systemGraphToGenerator <- function(g, failRate, repairRate) {
       }
     }
   }
-  
+
   Gnum <- matrix(0, nrow=length(map)+1, ncol=length(map)+1)
   Gchr <- matrix(0, nrow=length(map)+1, ncol=length(map)+1)
   const <- matrix(1, nrow=length(map)+1, ncol=length(map)+1)

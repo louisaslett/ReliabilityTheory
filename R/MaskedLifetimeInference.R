@@ -30,7 +30,7 @@ maskedInferenceIIDCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenD
 
   progress <- 0
   for(it in 2:(iter+1)) {
-    if(round(it*100/(iter+1), 0) != progress) { progress <- round(it*100/(iter+1), 0); cat("\r", progress, "% complete ...     "); }
+    if(round(it*100/(iter+1), 0) != progress) { progress <- round(it*100/(iter+1), 0); message("\r", progress, "% complete ...     "); }
     # DA block 1
     # DA block 1a
     # Sample topology given parameters and masked failure times
@@ -52,18 +52,18 @@ maskedInferenceIIDCustom <- function(t, signature, cdfComp, pdfComp, rParmGivenD
     for(i in 1:n) {
       # Generate failure order statistics
       sig2 <- sig * dbinom(0:(length(sig)-1), length(sig)-1, cdfComp(t[i], parm[it-1,,drop=FALSE], ...))
-      ##print(sig2)
+      ##message(sig2)
       o <- sample.int(length(sig), size=1, prob=sig2)
-      ##print(o)
+      ##message(o)
       censoring <- c(rep(-1, o-1), 0, rep(1, length(sig)-o))
       y <- c(y, rCompGivenParm(parm[it-1,,drop=FALSE], t[i], censoring, ...))
     }
-    ##cat("Simulated Components:", y, "\n")
+    ##message("Simulated Components:", y, "\n")
 
     # DA block 2
     # Sample a new parameter values given simulated component failure times
     parm[it,] <- rParmGivenData(y, ...)
-    ##cat("New Parameter Drawn:", parm[i], "\n===\n")
+    ##message("New Parameter Drawn:", parm[i], "\n===\n")
   }
   if(sigIsList) {
     return(cbind(topology=M[-1], parm[-1,,drop=FALSE]))
@@ -107,7 +107,7 @@ maskedInferenceEXCHCustom <- function(t, signature, cdfComp, pdfComp, rParmGiven
 
   progress <- 0
   for(it in 2:(iter+1)) {
-    if(round(it*100/(iter+1), 0) != progress) { progress <- round(it*100/(iter+1), 0); cat("\r", progress, "% complete ...     "); }
+    if(round(it*100/(iter+1), 0) != progress) { progress <- round(it*100/(iter+1), 0); message("\r", progress, "% complete ...     "); }
     # DA block 1
     # DA block 1a
     # Sample topology given parameters and masked failure times
@@ -130,13 +130,13 @@ maskedInferenceEXCHCustom <- function(t, signature, cdfComp, pdfComp, rParmGiven
     for(i in 1:n) {
       # Generate failure order statistics
       sig2 <- exp(log(sig) + dbinom(0:(m-1), m-1, cdfComp(t[i], psi[[i]][it-1,,drop=FALSE], ...), log=TRUE))
-      ##print(psi)
+      ##message(psi)
       o <- sample.int(m, size=1, prob=sig2)
-      ##print(o)
+      ##message(o)
       censoring <- c(rep(-1, o-1), 0, rep(1, m-o))
       y[i,] <- rCompGivenParm(psi[[i]][it-1,,drop=FALSE], t[i], censoring, ...)
     }
-    ##cat("Simulated Components:", y, "\n")
+    ##message("Simulated Components:", y, "\n")
 
     # DA block 2
     # Sample a new parameter values given simulated component failure times
@@ -145,7 +145,7 @@ maskedInferenceEXCHCustom <- function(t, signature, cdfComp, pdfComp, rParmGiven
     for(i in 1:n) {
       psi[[i]][it,] <- parm[[2]][[i]]
     }
-    ##cat("New Parameter Drawn:", parm[i], "\n===\n")
+    ##message("New Parameter Drawn:", parm[i], "\n===\n")
   }
   if(sigIsList) {
     return(list(

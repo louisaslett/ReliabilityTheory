@@ -8,7 +8,7 @@ coherentNetworksOfOrder <- function(n) {
   i <- 1
   progress <- 0.0
   for(m in 1:tot) {
-    if(round(m*100/tot, 1) != progress) { progress <- round(m*100/tot, 1); cat("\r", progress, "%   "); }
+    if(round(m*100/tot, 1) != progress) { progress <- round(m*100/tot, 1); message("\r", progress, "%   "); }
     # Make the graph
     adjacency[upper.tri(adjacency)] <- c(digitsBase(m, 2, ((n+2)*(n+2)-n-2)/2))
     # Exclude possibility of direct s,t connection

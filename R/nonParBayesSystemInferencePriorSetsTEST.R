@@ -112,10 +112,10 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
     n <- split(cbind(nLower, nUpper), 1:K)
     for(k in 1:K) {
       if(yLower[k] < yl[k]) {
-        cat("TheoremA\n")
+        message("TheoremA\n")
         n[[k]] <- nUpper[k]
       } else if(yLower[k] > yu[k]) {
-        cat("TheoremB\n")
+        message("TheoremB\n")
         n[[k]] <- nLower[k]
       } else if((lgamma(m[k]+nUpper[k]*(1-yLower[k])+N[k]-s[k])+
                  lgamma(nLower[k]*(1-yLower[k])+N[k]-s[k])+
@@ -133,7 +133,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(nUpper[k]*yLower[k]+s[k])+
                  lgamma(nLower[k]+N[k])+
                  lgamma(m[k]+nUpper[k]+N[k]) <= 0)) {
-        cat("LemmaA\n")
+        message("LemmaA\n")
         n[[k]] <- nUpper[k]
       } else if((lgamma(m[k]+nUpper[k]*(1-yLower[k])+N[k]-s[k])+
                  lgamma(nLower[k]*(1-yLower[k])+N[k]-s[k])+
@@ -151,13 +151,13 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(nUpper[k]*yLower[k]+s[k])-
                  lgamma(nLower[k]+N[k])-
                  lgamma(m[k]+nUpper[k]+N[k]) >= 0)) {
-        cat("LemmaB\n")
+        message("LemmaB\n")
         n[[k]] <- nLower[k]
       }
     }
     nCur2 <<- unlist(n, use.names=FALSE)
     if(max(sapply(n, length)) > 1) { # In here the theorems or lemmas were not enough, so grid search over what is left
-      cat("Theory not enough\n")
+      message("Theory not enough\n")
       nGrid2 <- expand.grid(split(cbind(nLower, nUpper), 1:K))
       res2 <- apply(nGrid2, 1, function(n, sig, prob.col, s, m, N, K, yLower) {
         sum(apply(sig, 1, function(sigvec, prob.col, s, m, N, n, yLower) {
@@ -180,10 +180,10 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
       }, sig=sig, prob.col=prob.col, s=s, m=m, N=N, K=K, yLower=yLower)
     }
     if(!isTRUE(all.equal(nCur, nCur2)) || !isTRUE(all.equal(res, res2))) {
-      cat("ERROR: disagreement\n")
-      print(n)
-      print(nCur)
-      print(nCur2)
+      message("ERROR: disagreement\n")
+      message(n)
+      message(nCur)
+      message(nCur2)
     }
     res
   }, at.times=at.times, nLower=nLower, nUpper=nUpper, yLower=yLower, yUpper=yUpper, sig=survival.signature, prob.col=prob.col, test.data=test.data, m=apply(survival.signature[,-length(survival.signature),drop=FALSE], 2, max), N=sapply(test.data, length), K=K))[rank(at.times)]
@@ -213,10 +213,10 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
     n <- split(cbind(nLower, nUpper), 1:K)
     for(k in 1:K) {
       if(yUpper[k] < yl[k]) {
-        cat("TheoremA2\n")
+        message("TheoremA2\n")
         n[[k]] <- nLower[k]
       } else if(yUpper[k] > yu[k]) {
-        cat("TheoremB2\n")
+        message("TheoremB2\n")
         n[[k]] <- nUpper[k]
       } else if((lgamma(m[k]+nUpper[k]*(1-yUpper[k])+N[k]-s[k])+
                  lgamma(nLower[k]*(1-yUpper[k])+N[k]-s[k])+
@@ -234,7 +234,7 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(nUpper[k]*yUpper[k]+s[k])+
                  lgamma(nLower[k]+N[k])+
                  lgamma(m[k]+nUpper[k]+N[k]) <= 0)) {
-        cat("LemmaA2\n")
+        message("LemmaA2\n")
         n[[k]] <- nLower[k]
       } else if((lgamma(m[k]+nUpper[k]*(1-yUpper[k])+N[k]-s[k])+
                  lgamma(nLower[k]*(1-yUpper[k])+N[k]-s[k])+
@@ -252,13 +252,13 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
                  lgamma(nUpper[k]*yUpper[k]+s[k])-
                  lgamma(nLower[k]+N[k])-
                  lgamma(m[k]+nUpper[k]+N[k]) >= 0)) {
-        cat("LemmaB2\n")
+        message("LemmaB2\n")
         n[[k]] <- nUpper[k]
       }
     }
     nCur2 <<- unlist(n, use.names=FALSE)
     if(max(sapply(n, length)) > 1) { # In here the theorems or lemmas were not enough, so grid search over what is left
-      cat("Theory not enough\n")
+      message("Theory not enough\n")
       nGrid2 <- expand.grid(split(cbind(nLower, nUpper), 1:K))
       res2 <- apply(nGrid2, 1, function(n, sig, prob.col, s, m, N, K, yUpper) {
         sum(apply(sig, 1, function(sigvec, prob.col, s, m, N, n, yUpper) {
@@ -281,10 +281,10 @@ nonParBayesSystemInferencePriorSetsTEST <- function(at.times, survival.signature
       }, sig=sig, prob.col=prob.col, s=s, m=m, N=N, K=K, yUpper=yUpper)
     }
     if(!isTRUE(all.equal(nCur, nCur2)) || !isTRUE(all.equal(res, res2))) {
-      cat("ERROR: disagreement\n")
-      print(n)
-      print(nCur)
-      print(nCur2)
+      message("ERROR: disagreement\n")
+      message(n)
+      message(nCur)
+      message(nCur2)
     }
     res
   }, at.times=at.times, nLower=nLower, nUpper=nUpper, yLower=yLower, yUpper=yUpper, sig=survival.signature, prob.col=prob.col, test.data=test.data, m=apply(survival.signature[,-length(survival.signature),drop=FALSE], 2, max), N=sapply(test.data, length), K=K))[rank(at.times)]

@@ -47,7 +47,7 @@ computeSystemSurvivalSignature <- function(sys, cutsets = NULL, frac = FALSE) {
     working <- comp[state==1]
     if( sum(vapply(cutsets, function(x) { prod(x %in% failed) == 1 }, TRUE)) == 0 ) { # TRUE only if the system is working
       #numWorkingByType <- sapply(CbyType, function(x) { sum(working%in%x) })
-      #print(which(apply(survSig[,1:numC], 1, identical, y=as.double(vapply(CbyType, function(x) { sum(working%in%x) }, 1)))))
+      #message(which(apply(survSig[,1:numC], 1, identical, y=as.double(vapply(CbyType, function(x) { sum(working%in%x) }, 1)))))
       survSig[which(apply(survSig[,1:numC,drop=FALSE], 1, identical, y=as.double(vapply(CbyType, function(x) { sum(working%in%x) }, 1)))),numC+1] <- survSig[which(apply(survSig[,1:numC,drop=FALSE], 1, identical, y=as.double(vapply(CbyType, function(x) { sum(working%in%x) }, 1)))),numC+1]+1
     }
   }
