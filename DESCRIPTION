@@ -8,7 +8,7 @@ Description: Perform structural reliability analysis, including computation and
     Aslett (2012) <https://www.louisaslett.com/PhD_Thesis.pdf>.
 URL: https://www.louisaslett.com/, https://github.com/louisaslett/ReliabilityTheory
 BugReports: https://github.com/louisaslett/ReliabilityTheory/issues
-Version: 0.3.0
+Version: 0.3.0.9000
 Maintainer: Louis Aslett <louis.aslett@durham.ac.uk>
 Authors@R: person("Louis", "Aslett", email = "louis.aslett@durham.ac.uk",
                   role = c("aut", "cre", "cph"))
