@@ -9,7 +9,7 @@ systemGraphToGenerator(g, failRate, repairRate)
 }
 \arguments{
   \item{g}{
-    an \code{\link{igraph}} object representing the system or network whose generator matrix representation is to be computed.  There should be two terminal 'dummy' nodes to represent either end of the structure which must be labelled "s" and "t".  They are assumed perfectly reliable.  See details and examples.
+    an \code{\link[igraph]{igraph}} object representing the system or network whose generator matrix representation is to be computed.  There should be two terminal 'dummy' nodes to represent either end of the structure which must be labelled "s" and "t".  They are assumed perfectly reliable.  See details and examples.
 }
   \item{failRate}{
     the rate parameter of the Exponentially distributed lifetime distribution of the components.
@@ -19,11 +19,11 @@ systemGraphToGenerator(g, failRate, repairRate)
 }
 }
 \details{
-When the system or network is specified by means of an \code{\link{igraph}} object, each end of the system must be denoted by nodes named "s" and "t" which are taken to be perfectly reliable.  It is easy to construct the appropriate graph representation using the function \code{\link{graph.formula}}.
+When the system or network is specified by means of an \code{\link[igraph]{igraph}} object, each end of the system must be denoted by nodes named "s" and "t" which are taken to be perfectly reliable.  It is easy to construct the appropriate graph representation using the function \code{\link[igraph]{graph.formula}}.
 
 This function then creates the generator matrix for an absorbing continuous-time Markov chain representation of such a system where components are repairable.  All system states which in which the system is inoperative are collapsed into the absorbing state.
 
-The returned values are in the format required by the \code{\link{phtMCMC2}}.%, \code{\link{maskedInferenceIIDPhaseType}}, and \code{\link{maskedInferenceEXCHPhaseType}} functions making their use even with big systems very easy.
+The returned values are in the format required by the \code{\link[PhaseType]{phtMCMC2}}.%, \code{\link[PhaseType]{maskedInferenceIIDPhaseType}}, and \code{\link[PhaseType]{maskedInferenceEXCHPhaseType}} functions making their use even with big systems very easy.
 
 Full details are in Aslett (2012).
 }
