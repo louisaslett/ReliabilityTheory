@@ -1,9 +1,9 @@
 # ReliabilityTheory <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![license](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
-[![metacran downloads](http://cranlogs.r-pkg.org/badges/ReliabilityTheory?color=brightgreen)](https://cran.r-project.org/package=ReliabilityTheory)
-[![metacran version](http://www.r-pkg.org/badges/version/ReliabilityTheory)](https://cran.r-project.org/package=ReliabilityTheory)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![license](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
+[![metacran version](https://www.r-pkg.org/badges/version/ReliabilityTheory)](https://cran.r-project.org/package=ReliabilityTheory)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/ReliabilityTheory)](https://cran.r-project.org/package=ReliabilityTheory)
 [![ReliabilityTheory status badge](https://louisaslett.r-universe.dev/badges/ReliabilityTheory)](https://louisaslett.r-universe.dev/ReliabilityTheory)
 
 The `{ReliabilityTheory}` package provides a variety of tools useful for performing structural reliability analysis, such as when using the structure function, system signature or survival signature.
