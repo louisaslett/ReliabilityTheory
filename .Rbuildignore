@@ -6,3 +6,4 @@ LICENSE
 ^R/hex\.R$
 ^inst/.*\.png$
 ^CRAN-SUBMISSION$
+^revdep$
